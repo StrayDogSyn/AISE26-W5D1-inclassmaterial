@@ -1,0 +1,79 @@
+# Deployment Job Example
+# Shows how to add deployment steps to your CI/CD pipeline
+
+name: CI with Deployment
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        
+    - name: Install dependencies
+      run: |
+        pip install pytest
+        
+    - name: Run tests
+      run: pytest
+      
+  deploy:
+    # Only run deploy if tests pass
+    needs: test
+    runs-on: ubuntu-latest
+    # Only deploy from main branch
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Deploy to staging
+      run: |
+        echo "Deploying to staging environment..."
+        # In real scenario, you might:
+        # - Build Docker image
+        # - Push to container registry
+        # - Update Kubernetes deployment
+        # - Deploy to cloud platform (AWS, Azure, GCP)
+        
+    - name: Run smoke tests
+      run: |
+        echo "Running smoke tests on staging..."
+        # Test critical functionality
+        
+    - name: Deploy to production
+      run: |
+        echo "Deploying to production environment..."
+        # Production deployment steps
+        
+    - name: Notify team
+      run: |
+        echo "Sending notification to team..."
+        # Send Slack/email notification
+
+
+# Advanced deployment strategies:
+#
+# 1. Blue-Green Deployment
+#    - Deploy to "green" environment
+#    - Run tests
+#    - Switch traffic from "blue" to "green"
+#
+# 2. Canary Deployment
+#    - Deploy to subset of servers
+#    - Monitor metrics
+#    - Gradually roll out to all servers
+#
+# 3. Rolling Deployment
+#    - Update servers one at a time
+#    - Keep service running throughout
+

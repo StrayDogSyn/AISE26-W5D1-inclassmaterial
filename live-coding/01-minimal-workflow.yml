@@ -1,0 +1,27 @@
+# Minimal GitHub Actions Workflow
+# This is the simplest possible workflow to demonstrate CI/CD concepts
+
+name: Minimal CI
+
+# Trigger the workflow on push to any branch
+on: [push]
+
+# Define the jobs
+jobs:
+  # A simple job that just prints "Hello World"
+  hello-world:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Print greeting
+      run: echo "Hello, CI/CD World!"
+      
+    - name: Print date
+      run: date
+      
+    - name: Print environment info
+      run: |
+        echo "Runner OS: ${{ runner.os }}"
+        echo "GitHub Actor: ${{ github.actor }}"
+        echo "Repository: ${{ github.repository }}"
+
