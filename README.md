@@ -1,4 +1,4 @@
-# W5D1 - CI/CD Fundamentals: GitHub Actions, Automated Testing, Deployment
+![1761620176048](image/README/1761620176048.png)# W5D1 - CI/CD Fundamentals: GitHub Actions, Automated Testing, Deployment
 
 <!-- ci-trigger: noop update to README to trigger GitHub Actions workflows -->
 
