@@ -43,6 +43,7 @@ Before starting this lesson, ensure you have:
 Transform a basic Python calculator application into a professionally configured repository with automated CI/CD pipelines. You'll start with intentionally failing tests, fix them, add automated testing across multiple Python versions, and implement gated deployments that only run when tests pass.
 
 Your final repository will include:
+
 - Working GitHub Actions workflow that runs on every push and pull request
 - Test suite that passes in CI
 - Python version matrix testing (3.10 and 3.11)
@@ -55,6 +56,7 @@ Your final repository will include:
 ### Part 1: Your First CI Workflow (6:30-7:35 PM)
 
 **What You'll Do:**
+
 - Create a GitHub repository with a basic Python calculator app
 - Set up a GitHub Actions workflow (`.github/workflows/ci.yml`)
 - Observe an intentionally failing CI run
@@ -62,11 +64,13 @@ Your final repository will include:
 - Understand how the `needs:` keyword gates deployment after tests pass
 
 **Deliverable:**
+
 - Screenshots of both failing (red ❌) and passing (green ✅) CI runs
 
 ### Part 2: Pull Requests & Test Matrix (7:45-8:35 PM)
 
 **What You'll Do:**
+
 - Create a feature branch and open a pull request
 - Watch CI run automatically on your PR
 - Add a Python version matrix to test across Python 3.10 and 3.11
@@ -74,17 +78,20 @@ Your final repository will include:
 - Confirm deployment waits for all matrix jobs to succeed
 
 **Deliverable:**
+
 - Working pull request with matrix testing across multiple Python versions
 
 ### Part 3: Branch Protection & Debugging (8:35-9:05 PM)
 
 **What You'll Do:**
+
 - Configure branch protection rules on the `main` branch
 - Require status checks to pass before merging
 - Practice debugging common CI failures (YAML indentation, test failures, branch mismatches)
 - Document your resolution approach
 
 **Deliverable:**
+
 - Protected `main` branch with required CI checks
 - Experience troubleshooting realistic CI/CD issues
 
@@ -120,7 +127,7 @@ Submit to Canvas Module W5D1:
 
 ### Option 2: Local Development Setup
 
-#### For Mac/Linux:
+#### For Mac/Linux
 
 ```bash
 # Clone the repository
@@ -139,7 +146,7 @@ pip install -r requirements.txt
 pytest -q
 ```
 
-#### For Windows (PowerShell):
+#### For Windows (PowerShell)
 
 ```powershell
 # Clone the repository
@@ -163,7 +170,7 @@ pytest -q
 
 ## Repository Structure
 
-```
+```text
 AISE26-W5D1-inclassmaterial/
 ├── .github/
 │   └── workflows/
@@ -202,15 +209,18 @@ Our CI/CD pipeline (`.github/workflows/ci.yml`) performs the following steps:
 ### Key Workflow Components
 
 **Jobs:**
+
 - `build-and-test`: Checks out code, sets up Python, installs dependencies, runs tests
 - `deploy`: Only runs after `build-and-test` succeeds (controlled by `needs:`)
 
 **Matrix Strategy:**
+
 - Tests run in parallel across Python 3.10 and 3.11
 - Ensures compatibility across versions
 - Deploy waits for all matrix jobs to complete successfully
 
 **Cache:**
+
 - Caches pip dependencies to speed up subsequent runs
 - Reduces build time significantly
 
@@ -250,14 +260,17 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ### Common CI Failure Patterns
 
 **YAML Indentation Error:**
+
 - Remove or add spaces to break the workflow
 - Fix by restoring proper 2-space indentation
 
 **Branch Mismatch:**
+
 - Workflow specifies `main` but you're pushing to `master`
 - Update `on.push.branches` to match your branch name
 
 **Test Failure:**
+
 - Assertion error in test code
 - Fix the test or the application code to make tests pass
 
